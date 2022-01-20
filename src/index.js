@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {BrowserRouter as Router,Routes,Route,Navigate,Link,Outlet} from 'react-router-dom'
+import {BrowserRouter as Router,Routes,Route,Navigate,Link,Outlet,useParams} from 'react-router-dom'
 
 
 ReactDOM.render(
@@ -11,7 +11,9 @@ ReactDOM.render(
           <Route path='/myapps' element={<Navigate replace to='/learn'/>} />
          
           <Route path='/learn' element={<Learn />} >
-                   <Route path='courses' element={<Courses/>} />
+                   <Route path='courses' element={<Courses/>} >
+                            <Route path=':id' element={<CourseId />}/>
+                   </Route>
                    <Route path='bundles' element={<Bundles/>} />
           </Route>
          
@@ -19,6 +21,17 @@ ReactDOM.render(
   </Router>,
   document.getElementById('root')
 );
+
+function CourseId(){
+
+  const {id} = useParams()
+  return(
+    <div>
+      <h1>{`Your Url is ${id}`}</h1>
+    </div>
+  )
+}
+
 
 function Home(){
   return (
@@ -46,6 +59,7 @@ function Courses(){
     <div>
       <h1>Courses List</h1>
       <h1>Courses Card</h1>
+      <Outlet />
     </div>
   )
 }
