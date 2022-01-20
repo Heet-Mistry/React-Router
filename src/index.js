@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {BrowserRouter as Router,Routes,Route,Navigate,Link} from 'react-router-dom'
+import {BrowserRouter as Router,Routes,Route,Navigate,Link,Outlet} from 'react-router-dom'
 
 
 ReactDOM.render(
@@ -11,7 +11,8 @@ ReactDOM.render(
           <Route path='/myapps' element={<Navigate replace to='/learn'/>} />
          
           <Route path='/learn' element={<Learn />} >
-                   <Route path='/course' element={<p>Hello</p>} />
+                   <Route path='courses' element={<Courses/>} />
+                   <Route path='bundles' element={<Bundles/>} />
           </Route>
          
       </Routes>
@@ -32,9 +33,10 @@ function Learn(){
     <div>
       <h1>Learn</h1>
       <h4>All courses are listed are here</h4>
-      <Link className='btn btn-success' to='/learn/course'>Courses</Link>
+      <Link className='btn btn-success' to='/learn/courses'>Courses</Link>
       {"   "}
-      <Link className='btn btn-primary' to='/learn/bundle'>Bundle</Link>
+      <Link className='btn btn-primary' to='/learn/bundles'>Bundle</Link>
+      <Outlet />
     </div>
   )
 }
